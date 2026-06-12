@@ -25,7 +25,7 @@ html, body {
 
 html::-webkit-scrollbar, body::-webkit-scrollbar {
     display: none;
-}
+}   
 
 .rounded-pill {
     transition: transform 0.3s ease-in-out 0s, box-shadow 0.3s ease-in-out 0s;
@@ -456,8 +456,9 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
     border-top: 1px solid rgba(222, 151, 242, 0.25);
 }
 
-@media (max-width: 767.98px) {
-    #main-header {
-        background-color: var(--primary) !important;
-    }
+#main-header .navbar-brand img, 
+#main-header .logo img {
+    max-height: 350px;
+    width: auto;
 }
+
