@@ -76,16 +76,20 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
     transition: opacity 0.3s ease-in-out;
 }
 
-.hero-item .imgHover{
-    opacity: 0;
-}
+@media (min-width: 992px){
+    
+    .hero-item .imgHover{
+        opacity: 0;
+    }
 
-.hero-item:hover .imgHover{
-    opacity: 1;
-}
+    .hero-item:hover .imgHover{
+        opacity: 1;
+    }
 
-.hero-item:hover img:not(.imgHover) {
-    opacity: 0;
+    .hero-item:hover img:not(.imgHover) {
+        opacity: 0;
+    }
+
 }
 
 .hero-item::before {
