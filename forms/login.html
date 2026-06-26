@@ -25,19 +25,16 @@
             padding: 2rem;
         }
 
-        /* Tabs */
         .nav-pills .nav-link {
             color: #555;
             border-radius: .65rem;
             font-weight: 500;
         }
-
         .nav-pills .nav-link.active {
             background-color: var(--primary2);
             color: #fff;
         }
 
-        /* Inputs */
         .form-control:focus {
             border-color: var(--tertiary2);
             box-shadow: 0 0 0 .25rem rgba(99, 208, 217, .25);
@@ -148,7 +145,6 @@
 
             <div class="tab-content" id="authTabContent">
 
-                <!-- LOGIN -->
                 <section class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
                     <div class="mb-3 text-center">
                         <h1 class="fs-4 fw-bold mb-1">Bem vinda de volta!</h1>
@@ -178,7 +174,6 @@
                     </form>
                 </section>
 
-                <!-- SIGN UP -->
                 <section class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
                     <div class="mb-3 text-center">
                         <h1 class="fs-4 fw-bold mb-1">Crie sua conta</h1>
@@ -199,18 +194,6 @@
                             <div class="input-group">
                                 <input type="password" class="form-control" name="password" id="passwordSignup"
                                     placeholder="Sua senha">
-                                <button type="button" class="btn btn-outline-secondary toggle-password"
-                                    aria-label="Mostrar senha">
-                                    <i class="icon-eye bi bi-eye-fill"></i>
-                                    <i class="icon-eye-slash bi bi-eye-slash-fill d-none"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="passwordConfirm" class="form-label">Confirmar senha</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm"
-                                    placeholder="Sua senha novamente">
                                 <button type="button" class="btn btn-outline-secondary toggle-password"
                                     aria-label="Mostrar senha">
                                     <i class="icon-eye bi bi-eye-fill"></i>
