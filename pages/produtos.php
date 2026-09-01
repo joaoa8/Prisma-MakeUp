@@ -10,7 +10,7 @@
 
 <body>
    
-
+    <?php include '../components/produtoSections/corretivo.php'?>
 
 
 
