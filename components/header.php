@@ -18,7 +18,7 @@
                             <a class="nav-link p-0 text-green2" href="index.php ">SOBRE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link p-0 text-white" href="/pages/produtos.php">PRODUTOS</a>
+                            <a class="nav-link p-0 text-white" href="/Prisma-MakeUp/pages/produtos.php">PRODUTOS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link p-0 text-white" href="#">APRENDER</a>
