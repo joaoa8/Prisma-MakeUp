@@ -15,10 +15,10 @@
                 <div class="collapse navbar-collapse text-center mt-3 mt-lg-0" id="MenuNav">
                     <ul class="navbar-nav ms-auto d-flex flex-column flex-lg-row align-items-center gap-3 gap-lg-4">
                         <li class="nav-item">
-                            <a class="nav-link p-0 text-green2" href="index.html">SOBRE</a>
+                            <a class="nav-link p-0 text-green2" href="index.php ">SOBRE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link p-0 text-white" href="/pages/produtos.html">PRODUTOS</a>
+                            <a class="nav-link p-0 text-white" href="/pages/produtos.php">PRODUTOS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link p-0 text-white" href="#">APRENDER</a>
