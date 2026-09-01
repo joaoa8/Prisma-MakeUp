@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Prisma-MakeUp - Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -12,8 +12,8 @@
 </head>
 <body>
     <?php include '../components/header.php'; ?>
-    <main class="container-fluid d-flex justify-content-center align-items-center min-vh-100">
-    <div class="auth-card position-fixed top-50 start-50 translate-middle">
+    <main class="container-fluid d-flex justify-content-center align-items-center">
+    <div class="auth-card">
             <ul class="nav nav-pills nav-fill mb-4" id="authTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="login-tab" data-bs-toggle="pill" data-bs-target="#login"
