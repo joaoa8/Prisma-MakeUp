@@ -1,8 +1,8 @@
 :root {
     --card-w: 320px;
     --card-h: 460px;
-    --scene-h: 700px;
-    --stage-h: 550px;
+    --scene-h: auto;
+    --stage-h: 580px;
     --icon-size: 58px;
     --name-size: 16px;
     --cat-size: 9px;
@@ -296,6 +296,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
     position: relative;
     width: 100%;
     height: var(--stage-h);
+    padding-bottom: 150px;
     perspective: 900px;
     display: flex;
     align-items: center;

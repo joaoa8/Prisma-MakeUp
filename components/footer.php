@@ -1,4 +1,4 @@
-<footer class="position-fixed bottom-0 border-top border-1 border-purple2 bg-purple w-100 p-3">
+<footer class="border-top border-1 border-purple2 bg-purple w-100 p-3">
         <div class="text-center">
             <h4>Prisma <span class="text-purple2">MakeUp</span></h4>
             <ul class="list-unstyled d-flex justify-content-center gap-4">
