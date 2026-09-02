@@ -3,7 +3,7 @@ name: 🚀 Deploy no InfinityFree
 on:
   push:
     branches:
-      - main # Mude para 'master' se a sua branch principal tiver esse nome
+      - master
 
 jobs:
   web-deploy:
