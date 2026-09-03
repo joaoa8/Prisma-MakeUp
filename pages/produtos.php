@@ -6,12 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/styleGeral.css">
 </head>
 
 <body style="background-color: lightpink;">
    
+     <?php include '../components/header.php'?>
      <?php include '../components/produtoSections/corretivo.php'?>
      <?php include '../components/produtoSections/batom-gloss.php'?>
+     <?php include '../components/produtoSections/rimel.php'?>
+     <?php include '../components/produtoSections/po-facial.php'?>
+     <?php include '../components/produtoSections/blush.php'?>
+     <?php include '../components/footer.php'?>
 
 
 

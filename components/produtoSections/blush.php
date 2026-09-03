@@ -3,25 +3,25 @@
         [
             'nome' => 'corretivo1',
             'preco' => 'R$22',
-            'imagem' => '../assets/maquiagens/corretivo1.jpg',
+            'imagem' => '../assets/maquiagens/blush1.webp',
             'descricao' => 'maquiagem muito bacana'
         ],
         [
             'nome' => 'corretivo2',
             'preco' => 'R$22',
-            'imagem' => '../assets/maquiagens/corretivo2.jpg',
+            'imagem' => '../assets/maquiagens/blush2.jpg',
             'descricao' => 'maquiagem muito bacana'
         ],
         [
             'nome' => 'corretivo3',
             'preco' => 'R$22',
-            'imagem' => '../assets/maquiagens/corretivo3.jpg',
+            'imagem' => '../assets/maquiagens/blush3.webp',
             'descricao' => 'maquiagem muito bacana'
         ],
         [
             'nome' => 'corretivo4',
             'preco' => 'R$22',
-            'imagem' => '../assets/maquiagens/corretivo4.jpg',
+            'imagem' => '../assets/maquiagens/blush4.jpg',
             'descricao' => 'maquiagem muito bacana'
         ]
     ]

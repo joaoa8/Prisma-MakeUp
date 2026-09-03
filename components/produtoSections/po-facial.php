@@ -3,25 +3,25 @@
         [
             'nome' => 'corretivo1',
             'preco' => 'R$22',
-            'imagem' => '../assets/maquiagens/batom1.jpg',
+            'imagem' => '../assets/maquiagens/po1.jpg',
             'descricao' => 'maquiagem muito bacana'
         ],
         [
             'nome' => 'corretivo2',
             'preco' => 'R$22',
-            'imagem' => '../assets/maquiagens/gloss1.jpg',
+            'imagem' => '../assets/maquiagens/po2.jpg',
             'descricao' => 'maquiagem muito bacana'
         ],
         [
             'nome' => 'corretivo3',
             'preco' => 'R$22',
-            'imagem' => '../assets/maquiagens/batom2.jpg',
+            'imagem' => '../assets/maquiagens/po3.jpg',
             'descricao' => 'maquiagem muito bacana'
         ],
         [
             'nome' => 'corretivo4',
             'preco' => 'R$22',
-            'imagem' => '../assets/maquiagens/gloss2.jpg',
+            'imagem' => '../assets/maquiagens/po4.jpg',
             'descricao' => 'maquiagem muito bacana'
         ]
     ]
@@ -34,7 +34,7 @@
             
             <!-- 1º VEM A FOTO (Ficará na Esquerda) -->
             <div class="col-12 col-lg-4 text-center text-lg-end mb-4 mb-lg-0 ms-lg-5">
-                <img src="../assets/maquiagens/batom1.jpg" alt="Banner da Loja" class="img-fluid rounded shadow" style="max-width: 90%; height: 650px; object-fit: fill;">
+                <img src="../assets/maquiagens/po2.jpg" alt="Banner da Loja" class="img-fluid rounded shadow" style="max-width: 90%; height: 650px; object-fit: fill;">
             </div>
 
             <!-- 2º VÊM OS PRODUTOS (Ficarão na Direita) -->
