@@ -1,24 +1,22 @@
-name: 🚀 Deploy para o InfinityFree
+name: 🚀 Deploy no InfinityFree
 
 on:
   push:
     branches:
-      - master # Se a sua branch principal se chamar 'main', mude aqui
+      - master
 
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: 🎉 Deploy via FTP
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Baixando o código mais recente
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 2
-      
-    - name: 📂 Sincronizando arquivos via FTP
+
+    - name: 📂 Sincronizando arquivos com InfinityFree
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /seudominio.com.br/htdocs/ # Substitua pelo seu domínio real configurado no InfinityFree
+        server-dir: /htdocs/

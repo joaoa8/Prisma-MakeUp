@@ -27,7 +27,6 @@
     ]
     ?>
 
-
     <main>
         <h1 class="fst-italic mb-0 text-decoration-underline" style="background-color: lightpink">Corretivos</h1>
 
@@ -37,11 +36,13 @@
                     <?php foreach ($produtos as $produto): ?>
                         <div class="col-6 mt-3 mb-4 ">
                             <div class="card h-100 w-75 border border-info" style="background-color: lightblue">
+
                                 <img src="<?php echo $produto['imagem']; ?>" class="card-img-top" alt="<?php echo $produto['nome']; ?>" style="height: 200px; object-fit: cover;">
                                  
                                 
                                 <div class="card-body d-flex flex-column p-2">
                                     <h6 class="card-title mb-1" style="font-size: 0.85rem;"><?php echo $produto['nome']; ?></h6>
+
                                     <p class="card-text" style="font-size: 0.85rem"><?php echo $produto['descricao']?></p>
                                     
                                     <div class="mt-auto">
