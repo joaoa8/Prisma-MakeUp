@@ -3,25 +3,25 @@
         [
             'nome' => 'corretivo1',
             'preco' => 'R$22',
-            'imagem' => '../assets/maquiagens/corretivo1.jpg',
+            'imagem' => '../assets/maquiagens/rimel1.jpg',
             'descricao' => 'maquiagem muito bacana'
         ],
         [
             'nome' => 'corretivo2',
             'preco' => 'R$22',
-            'imagem' => '../assets/maquiagens/corretivo2.jpg',
+            'imagem' => '../assets/maquiagens/rimel2.jpg',
             'descricao' => 'maquiagem muito bacana'
         ],
         [
             'nome' => 'corretivo3',
             'preco' => 'R$22',
-            'imagem' => '../assets/maquiagens/corretivo3.jpg',
+            'imagem' => '../assets/maquiagens/rimel3.jpg',
             'descricao' => 'maquiagem muito bacana'
         ],
         [
             'nome' => 'corretivo4',
             'preco' => 'R$22',
-            'imagem' => '../assets/maquiagens/corretivo4.jpg',
+            'imagem' => '../assets/maquiagens/rimel4.jpg',
             'descricao' => 'maquiagem muito bacana'
         ]
     ]
@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="col-12 col-lg-4 text-center text-lg-end mb-4 mb-lg-0 me-lg-5">
-            <img src="../assets/maquiagens/blush2.jpg" alt="Banner da Loja" class="img-fluid rounded shadow" style="max-width: 90%; height: 650px; object-fit: fill;">
+            <img src="../assets/maquiagens/rimel1.jpg" alt="Banner da Loja" class="img-fluid rounded shadow" style="max-width: 90%; height: 650px; object-fit: fill;">
         </div>
 
         </div>
