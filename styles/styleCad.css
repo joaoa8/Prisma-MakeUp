@@ -7,12 +7,12 @@
  }
 
  main{
-    flex: 1; /* Faz o 'main' crescer e ocupar todo o espaço livre, empurrando o footer para baixo */
+    flex: 1; 
   display: flex;
-  justify-content: center; /* Centraliza a caixa horizontalmente */
-  align-items: center; /* Centraliza a caixa verticalmente */
+  justify-content: center;
+  align-items: center; 
   padding: 2rem;
-  padding-top: 15dvh;
+  padding-top: 20dvh;
 }
 
  .auth-card {
