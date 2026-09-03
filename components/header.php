@@ -18,16 +18,16 @@
                 <div class="collapse navbar-collapse text-center mt-3 mt-lg-0" id="MenuNav">
                     <ul class="navbar-nav ms-auto d-flex flex-column flex-lg-row align-items-center gap-3 gap-lg-4">
                         <li class="nav-item">
-                            <a class="nav-link p-0 text-green2" href="<?php if($isIndex){echo "#";}else{echo "../index.php";}?>">SOBRE</a>
+                            <a class="nav-link p-0 <?php if($isIndex){echo "text-green2";}else{echo "text-white";}?>" href="<?php if($isIndex){echo "#";}else{echo "../index.php";}?>">SOBRE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link p-0 text-white" href="<?php if($isIndex){echo "/Prisma-MakeUp/pages/";}?>produtos.php">PRODUTOS</a>
+                            <a class="nav-link p-0 <?php if($arquivo_atual == "produtos.php"){echo "text-green2";}else{echo "text-white";}?>" href="<?php if($isIndex){echo "./pages/";}?>produtos.php">PRODUTOS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link p-0 text-white" href="<?php if($isIndex){echo "/Prisma-MakeUp/pages/";}?>cursos.php">APRENDER</a>
+                            <a class="nav-link p-0 <?php if($arquivo_atual == "curso.php"){echo "text-green2";}else{echo "text-white";}?>" href="<?php if($isIndex){echo "./pages/";}?>cursos.php">APRENDER</a>
                         </li>
                         <li class="nav-item fw-bold rounded-pill bg-purple2 p-2 px-3">
-                            <a class="nav-link p-0 text-white" href="<?php if($isIndex){echo "/Prisma-MakeUp/pages/";}?>login.php"><i class="bi bi-person me-1"></i>Login</a>
+                            <a class="nav-link p-0 text-white" href="<?php if($isIndex){echo "./pages/";}?>login.php"><i class="bi bi-person me-1"></i>Login</a>
                         </li>
                     </ul>
                 </div>
