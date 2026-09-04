@@ -19,4 +19,3 @@ const arquivosNotHeader = ["login.php", "chat.php", "admin.php"];
         }, { passive: true });
 
         window.dispatchEvent(new Event('scroll'));
-

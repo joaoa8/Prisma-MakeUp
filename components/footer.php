@@ -8,7 +8,8 @@
                     <li><a class="text-decoration-none text-secondary"  href="<?php if($isIndex){echo "#";}else{echo "../index.php";}?>">Sobre</a></li>
                     <li><a class="text-decoration-none text-secondary"  href="<?php if($isIndex){echo "/Prisma-MakeUp/pages/";}?>produtos.php">Produtos</a></li>
                     <li><a class="text-decoration-none text-secondary" href="<?php if($isIndex){echo "/Prisma-MakeUp/pages/";}?>cursos.php">Aprender</a></li>
-            </ul>;
+                    <li><a class="text-decoration-none text-secondary" href="<?php if($isIndex){echo "/Prisma-MakeUp/pages/";}?>chat.php">Ariane</a></li>
+            </ul>
             <p class="text-secondary m-0">© 2026 Prisma MakeUp. Todos os direitos reservados.</p>
         </div>
 </footer>

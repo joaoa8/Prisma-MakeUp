@@ -27,7 +27,7 @@
                             <a class="nav-link p-0 <?php if($arquivo_atual == "curso.php"){echo "text-green2";}?>" href="<?php if($isIndex){echo "./pages/";}?>cursos.php">APRENDER</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link p-0 <?php if($arquivo_atual == "chat.php"){echo "text-green2";}?>" href="<?php if($isIndex){echo "./pages/";}?>chat.php">INTELIGENCIA ARTIFICIAL</a>
+                            <a class="nav-link p-0 <?php if($arquivo_atual == "chat.php"){echo "text-green2";}?>" href="<?php if($isIndex){echo "./pages/";}?>chat.php">ARIANE</a>
                         </li>
                         <li class="nav-item fw-bold rounded-pill bg-purple2 p-2 px-3">
                             <a class="nav-link p-0 text-white" href="<?php if($isIndex){echo "./pages/";}?>login.php"><i class="bi bi-person me-1"></i>Login</a>
