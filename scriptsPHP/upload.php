@@ -14,7 +14,6 @@ if ($temImagem) {
     $imagemBase64 = base64_encode($dadosBinarios);
 }
 
-// TODO: mover para variável de ambiente / arquivo de config fora da pasta pública
 $apiKey = "AQ.Ab8RN6IhHosRayD9jFaDQmFSGw4_7PnxbNBwyW8FqcyZIODyAQ";
 
 $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=" . $apiKey;
@@ -78,7 +77,6 @@ $payload = [
             ]
         ]
     ],
-    // força a API a devolver JSON puro, sem cercas de markdown (```json ... ```)
     "generationConfig" => [
         "responseMimeType" => "application/json"
     ]
@@ -94,6 +92,7 @@ if ($temImagem) {
 }
 
 $ch = curl_init($url);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 curl_setopt($ch, CURLOPT_POST, true);

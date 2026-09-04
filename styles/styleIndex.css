@@ -211,10 +211,6 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
     border-radius: 5px;
 }
 
-.container {
-    margin-top: 10dvh;
-}
-
 .card {
     border: 1px solid #fffef7;
 }
@@ -507,3 +503,20 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
     width: auto;
 }
 
+.btn.rounded-pill {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.btn.rounded-pill:hover {
+    transform: scale(1.05);
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn.bg-purple2:hover {
+    background-color: #c96de8;
+}
+
+.btn.border-purple2:hover {
+    background-color: var(--primary2);
+    color: #fff !important;
+}

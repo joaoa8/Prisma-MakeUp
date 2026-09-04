@@ -5,4 +5,5 @@
     include 'components/indexSections/sectionTeam.php';
     include 'components/sectionFaq.php';
     include 'components/indexSections/sectionLink.php';
+    
 ?>
