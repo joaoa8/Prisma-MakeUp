@@ -1,7 +1,7 @@
  <?php
     $produtos = [
         [
-            'nome' => 'corretivo1',
+            'nome' => 'Corretivo1',
             'preco' => 'R$22',
             'imagem' => '../assets/maquiagens/corretivo1.jpg',
             'descricao' => 'maquiagem muito bacana'
@@ -26,41 +26,56 @@
         ]
     ]
     ?>
+    
 
-    <main>
-        <h1 class="fst-italic mb-0 text-decoration-underline" style="background-color: lightpink">Corretivos</h1>
+ <main>
+     <div class="container-titulo-linhas d-flex align-items-center my-5">
 
-<div class="row align-items-center justify-content-center" style="background-color: lightpink">
-        <div class="col-12 col-lg-5 p-5">
-            <div class="row">
-                <?php foreach ($produtos as $produto): ?>
-                    <div class="col-6 mt-3 mb-4">
-                        
-                        <!-- O card continua normal, ele obedece o tamanho da coluna mãe -->
-                        <div class="card h-100 border border-info w-75" style="background-color: lightblue">
-                            <img src="<?php echo $produto['imagem']; ?>" class="card-img-top" alt="<?php echo $produto['nome']; ?>" style="height: 200px; object-fit: cover;">
-                             
-                            <div class="card-body d-flex flex-column p-2">
-                                <h6 class="card-title mb-1" style="font-size: 0.85rem;"><?php echo $produto['nome']; ?></h6>
-                                <p class="card-text" style="font-size: 0.85rem"><?php echo $produto['descricao']?></p>
-                                
-                                <div class="mt-auto">
-                                    <div class="text-danger fw-bold mb-2" style="font-size: 0.8rem;"><?php echo $produto['preco']; ?></div>
-                                    <button class="btn btn-danger btn-sm w-100 fw-bold" style="font-size: 0.75rem;">COMPRAR</button>
-                                </div>
-                            </div>
-                        </div>
+         <!-- Linha Esquerda: flex-grow-1 faz ela esticar o máximo possível -->
+         <div class="linha-lateral flex-grow-1"></div>
 
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4 text-center text-lg-end mb-4 mb-lg-0 me-lg-5">
-            <img src="../assets/maquiagens/blush2.jpg" alt="Banner da Loja" class="img-fluid rounded shadow" style="max-width: 90%; height: 650px; object-fit: fill;">
-        </div>
+         <!-- O Texto Central: px-4 dá um espaçamento para as linhas não colarem nas letras -->
+         <div class="text-center px-4">
+             <h2 class="titulo-principal m-0">Corretivos</h2>
+             <span class="subtitulo">adeus olheiras, olá pele perfeita</span>
+         </div>
 
-        </div>
+         <!-- Linha Direita: flex-grow-1 faz ela esticar igual a outra -->
+         <div class="linha-lateral flex-grow-1"></div>
+
+     </div>
+
+     <div class="row align-items-center justify-content-center m-0">
+         <div class="col-12 col-lg-5 p-5">
+             <div class="row">
+                 <?php foreach ($produtos as $produto): ?>
+                     <div class="col-6 mt-3 mb-4">
+
+                         <!-- O card continua normal, ele obedece o tamanho da coluna mãe -->
+                         <div class="card h-100 w-75 shadow-sm border-0" style="background-color: #F4D6F8; border-radius: 13px">
+                             <img src="<?php echo $produto['imagem']; ?>" class="card-img-top" alt="<?php echo $produto['nome']; ?>" style="height: 200px; object-fit: cover; border-radius: 13px 13px 0 0">
+
+                             <div class="card-body d-flex flex-column p-3">
+                                 <h6 class="card-title mb-1 fw-bold" style="font-size: 1.3rem;"><?php echo $produto['nome']; ?></h6>
+                                 <p class="card-text text-muted small" style="font-size: 1rem"><?php echo $produto['descricao'] ?></p>
+
+                                 <div class="mt-auto">
+                                     <div class="fw-bold mb-2 fs-4 " style="font-size: 1.2rem; color: darkmagenta"><?php echo $produto['preco']; ?></div>
+                                     <button class="btn btn-sm w-100 fw-bold rounded-pill text-light " style="font-size: 15px; background-color: #DE97F2; ">COMPRAR</button>
+                                 </div>
+                             </div>
+                         </div>
+
+                     </div>
+                 <?php endforeach; ?>
+             </div>
+         </div>
+         <div class="col-12 col-lg-4 text-center text-lg-end mb-4 mb-lg-0 me-lg-5">
+             <img src="../assets/maquiagens/blush2.jpg" alt="Banner da Loja" class="img-fluid rounded shadow" style="max-width: 90%; height: 650px; object-fit: fill;">
+         </div>
+
+     </div>
 
 
 
-    </main>
+ </main>
