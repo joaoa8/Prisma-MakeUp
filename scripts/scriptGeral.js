@@ -2,8 +2,6 @@ const header = document.getElementById('main-header');
 const caminhoDaPagina = window.location.pathname;
 const nomeDoArquivo = caminhoDaPagina.substring(caminhoDaPagina.lastIndexOf('/') + 1);
 const arquivosNotHeader = ["login.php", "chat.php", "admin.php"];
-console.log(arquivosNotHeader);
-console.log(nomeDoArquivo);
         let isScrolling = false;
 
         window.addEventListener('scroll', function () {
