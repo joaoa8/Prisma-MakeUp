@@ -1,5 +1,71 @@
 body{
     padding-top: 20dvh;
+    min-height: 100dvh;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 55%, var(--secundary) 100%);
+    display: flex;
+    flex-direction: column;
+}
+
+#chat-container,
+#resposta{
+    width: min(100% - 2rem, 700px);
+}
+
+#chat-container{
+    padding: 0.5rem;
+}
+
+#controles .btn{
+    border-radius: .65rem;
+    font-weight: 500;
+}
+
+#controles .btn-primary{
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--primary2);
+    --bs-btn-border-color: var(--primary2);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #c875ec;
+    --bs-btn-hover-border-color: #c875ec;
+}
+
+#controles .btn-secondary{
+    --bs-btn-color: #5c4a00;
+    --bs-btn-bg: var(--secundary2);
+    --bs-btn-border-color: var(--secundary2);
+    --bs-btn-hover-color: #5c4a00;
+    --bs-btn-hover-bg: #e9cd6e;
+    --bs-btn-hover-border-color: #e9cd6e;
+}
+
+#controles .btn-outline-success{
+    --bs-btn-color: #258b94;
+    --bs-btn-border-color: var(--tertiary2);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--tertiary2);
+    --bs-btn-hover-border-color: var(--tertiary2);
+}
+
+#controles .btn-outline-secondary{
+    --bs-btn-color: #8b5a9c;
+    --bs-btn-border-color: var(--primary2);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--primary2);
+    --bs-btn-hover-border-color: var(--primary2);
+}
+
+.loading-icon{
+    display: inline-flex;
+    animation: loading-girar 1s linear infinite;
+}
+
+@keyframes loading-girar{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
 }
 
 .form{
@@ -11,17 +77,38 @@ form{
     display: flex;
     flex-direction: column;
     border: none;
+    margin: 0 auto;
 }
 
 footer{
-    position: fixed;
-    bottom: 0;
+    margin-top: auto;
 }
 
 @media (min-width: 1024px){
     body{
-        display: flex;
-        flex-direction: column;
         align-items: center;
+    }
+
+    #chat-container,
+    #resposta{
+        width: min(100% - 4rem, 900px);
+    }
+
+    #chat-container{
+        font-size: 1.1rem;
+    }
+
+    #chat-container .card{
+        max-width: 80% !important;
+        border-radius: 1rem !important;
+    }
+
+    #chat-container .card p{
+        line-height: 1.5;
+    }
+
+    #controles .btn,
+    #controles .form-control{
+        font-size: 1.05rem;
     }
 }

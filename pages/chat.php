@@ -15,28 +15,11 @@
 <body>
     <?php include '../components/header.php'; ?>
 
-    
 
-
-<div id="chat-container" class="d-flex flex-column mb-4">
-    <div class="card bg-light text-dark border-0 rounded-4 rounded-start-0 rounded-start-lg-4 p-3 shadow-sm me-auto mb-2" style="max-width: 75%;">
-        <p class="mb-1 text-break">Tudo ótimo! E por aí, como estão as coisas?</p>
-    </div>
-</div>
-
-<div id="form-container" class="form">
-    <form id="meu-formulario" enctype="multipart/form-data" class="p-4 text-center">
-        <div class="mb-3">
-            <label for="foto" class="form-label fs-3">Selecione uma foto:</label>
-            <input type="file" name="foto" id="foto" class="form-control" accept="image/*" required>
-        </div>
-        <div class="mb-3">
-            <label for="descricao" class="form-label fs-3">Descrição:</label>
-            <textarea name="descricao" id="descricao" class="form-control" rows="3" placeholder="Digite uma descrição para a foto..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary w-100" id="btn-enviar">Enviar Foto</button>
+<div id="chat-container" class="d-flex flex-column mb-4 w-100 p-0 p-lg-5"></div>
+    <form id="resposta" action="" class="mb-3">
+        <div id="controles" class="d-flex flex-column gap-2"></div>
     </form>
-</div>
     <?php include '../components/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

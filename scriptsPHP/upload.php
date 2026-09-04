@@ -1,76 +1,147 @@
 <?php
-// 1. Captura o texto longo enviado pelo formulário
+header('Content-Type: application/json; charset=utf-8');
+
 $descricao = isset($_POST['descricao']) ? trim($_POST['descricao']) : '';
 
-// 2. Verifica se a foto foi enviada corretamente
-if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-    
+$temImagem = isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK;
+$tipoMime = '';
+$imagemBase64 = '';
+
+if ($temImagem) {
     $arquivoTmp = $_FILES['foto']['tmp_name'];
-    
-    // Descobre o tipo MIME real da imagem (ex: image/jpeg, image/png)
     $tipoMime = mime_content_type($arquivoTmp);
-    
-    // Converte a imagem da memória temporária para Base64
     $dadosBinarios = file_get_contents($arquivoTmp);
     $imagemBase64 = base64_encode($dadosBinarios);
+}
 
-    // ==========================================
-    // 3. INTEGRAÇÃO COM A API DO GEMINI
-    // ==========================================
-    
-    $apiKey = "SUA_CHAVE_DE_API_DO_GEMINI"; // Substitua pela sua chave do Google AI Studio
-    
-    // Usamos um modelo multimodal como o gemini-1.5-flash ou gemini-1.5-pro
-    $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" . $apiKey;
+// TODO: mover para variável de ambiente / arquivo de config fora da pasta pública
+$apiKey = "AQ.Ab8RN6IhHosRayD9jFaDQmFSGw4_7PnxbNBwyW8FqcyZIODyAQ";
 
-    // Monta o payload (os dados que serão enviados para a IA)
-    $payload = [
-        "contents" => [
-            [
-                "parts" => [
-                    ["text" => $descricao], // O texto longo do usuário
-                    [
-                        "inline_data" => [
-                            "mime_type" => $tipoMime,
-                            "data" => $imagemBase64 // A imagem em base64 vinda direto da memória
-                        ]
-                    ]
-                ]
+$url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=" . $apiKey;
+
+$instrucao = '
+Você é uma Maquiadora Profissional e Consultora de Beleza Virtual altamente experiente, empática e criativa. Seu objetivo é analisar as informações fornecidas pelo usuário e criar uma recomendação de maquiagem personalizada, explicando o passo a passo de forma clara e acessível.
+
+### INFORMAÇÕES RECEBIDAS:
+Você tem os seguintes dados do usuário:
+- Imagem: [Foto do rosto do usuário, se aplicável]
+- Descrição da Face e Tom de Pele: [Texto descritivo fornecido pelo usuário]
+- Destino/Ocasião: [Para onde o usuário vai]
+- Horário: [Dia, tarde, noite]
+- Preferências Pessoais: [Cores favoritas, alergias, estilos como "natural", "glamour", etc.]
+- Aceita Recomendações de Produtos: [SIM/NÃO]
+
+### REGRAS DE COMPORTAMENTO:
+1. Tom de Voz: Seja encorajadora, amigável e profissional. Use uma linguagem que eleve a autoestima do usuário.
+2. Personalização: A maquiagem DEVE fazer sentido para o horário e a ocasião. (ex: maquiagem leve com proteção solar para um parque de dia; brilho e contorno marcado para uma balada à noite).
+3. Adaptação à Fisionomia: Se o usuário enviar uma foto ou descrição do rosto (ex: "olhos encapuzados", "pele oleosa"), adapte as técnicas de aplicação para valorizar esses traços.
+4. Recomendação de Produtos:
+   - SE "Aceita Recomendações de Produtos" for SIM: Você DEVE incluir uma lista de produtos recomendados para alcançar o visual. [NOTA: O sistema injetará o catálogo de produtos disponíveis aqui].
+   - SE "Aceita Recomendações de Produtos" for NÃO: NÃO mencione marcas ou produtos específicos, foque apenas nos tipos de produtos (ex: "use um blush pêssego", sem citar marca).
+
+### RECOMENDACOES DE PRODUTOS:
+Os produtos que podem ser recomendados são extritamente:
+-
+
+### FORMATO DE SAÍDA OBRIGATÓRIO (JSON):
+Você deve responder EXCLUSIVAMENTE em formato JSON válido, seguindo a estrutura abaixo, sem marcações markdown fora do JSON:
+
+{
+  "analise_inicial": "Um breve parágrafo elogiando o usuário e explicando por que o look escolhido é perfeito para a ocasião e horário.",
+  "nome_do_look": "Um nome criativo para a maquiagem (ex: Glow Solar de Domingo).",
+  "passo_a_passo": [
+    {
+      "etapa": "Preparação da Pele",
+      "instrucao": "Instruções detalhadas..."
+    },
+    {
+      "etapa": "Olhos",
+      "instrucao": "Instruções detalhadas..."
+    }
+  ],
+  "produtos_recomendados": [
+    {
+      "nome_do_produto": "Nome do produto da loja",
+      "motivo": "Por que este produto é ideal para o look"
+    }
+  ],
+  "dica_extra": "Uma dica de ouro final (ex: como fazer a maquiagem durar mais)."
+}';
+
+$promptCompleto = $instrucao . "\n\nDADOS RESPONDIDOS PELO USUÁRIO:\n" . $descricao;
+
+$payload = [
+    "contents" => [
+        [
+            "parts" => [
+                ["text" => $promptCompleto]
             ]
         ]
+    ],
+    // força a API a devolver JSON puro, sem cercas de markdown (```json ... ```)
+    "generationConfig" => [
+        "responseMimeType" => "application/json"
+    ]
+];
+
+if ($temImagem) {
+    $payload["contents"][0]["parts"][] = [
+        "inline_data" => [
+            "mime_type" => $tipoMime,
+            "data" => $imagemBase64
+        ]
     ];
+}
 
-    // Configura a requisição cURL
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
 
-    // Executa a requisição
-    $respostaApi = curl_exec($ch);
-    $erroCurl = curl_error($ch);
-    curl_close($ch);
+$respostaApi = curl_exec($ch);
+$erroCurl = curl_error($ch);
+curl_close($ch);
 
-    // ==========================================
-    // 4. TRATAMENTO DA RESPOSTA DA IA
-    // ==========================================
-    if ($erroCurl) {
-        echo "Erro de conexão com a API: " . $erroCurl;
-    } else {
-        $resultado = json_decode($respostaApi, true);
-        
-        // Extrai a resposta de texto gerada pelo Gemini
-        $respostaIa = $resultado['candidates'][0]['content']['parts'][0]['text'] ?? 'Não foi possível obter resposta da IA.';
+// helper: sempre devolve um JSON válido para o front-end, mesmo em caso de erro
+function responderErro(string $mensagem, int $statusHttp = 500): void {
+    http_response_code($statusHttp);
+    echo json_encode(['erro' => $mensagem], JSON_UNESCAPED_UNICODE);
+    exit;
+}
 
-        // Exibe o resultado na tela para o usuário
-        echo "<h2>Resposta da IA:</h2>";
-        echo "<div style='background: #f4f4f4; padding: 15px; border-radius: 5px;'>";
-        echo nl2br(htmlspecialchars($respostaIa));
-        echo "</div>";
+if ($erroCurl) {
+    responderErro('Erro de conexão com a API: ' . $erroCurl);
+}
+
+$resultado = json_decode($respostaApi, true);
+
+if (json_last_error() !== JSON_ERROR_NONE) {
+    responderErro('A API retornou uma resposta inválida.');
+}
+
+// a API pode bloquear a resposta por segurança, estourar cota, ou outros erros
+if (!isset($resultado['candidates'][0]['content']['parts'][0]['text'])) {
+    // registra o erro real no log do servidor (não exposto ao usuário final)
+    error_log('Erro da API Gemini: ' . json_encode($resultado, JSON_UNESCAPED_UNICODE));
+
+    // se for erro de cota, avisa isso especificamente (ajuda a diagnosticar rápido no futuro)
+    if (isset($resultado['error']['status']) && $resultado['error']['status'] === 'RESOURCE_EXHAUSTED') {
+        responderErro('Limite diário de uso da IA foi atingido. Tente novamente mais tarde.');
     }
 
-} else {
-    echo "Erro: Nenhuma imagem foi enviada ou ocorreu um erro no upload.";
+    $motivo = $resultado['promptFeedback']['blockReason'] ?? 'motivo desconhecido';
+    responderErro('Não foi possível obter resposta da IA (' . $motivo . ').');
 }
-?>
+
+$respostaIa = $resultado['candidates'][0]['content']['parts'][0]['text'];
+
+// validação extra: garante que o texto devolvido pela IA é realmente um JSON válido
+// antes de repassar para o front-end
+$jsonDecodificado = json_decode($respostaIa);
+if (json_last_error() !== JSON_ERROR_NONE) {
+    responderErro('A IA não retornou um JSON válido.');
+}
+
+// devolve o JSON da IA diretamente, sem nenhum HTML em volta
+echo $respostaIa;
