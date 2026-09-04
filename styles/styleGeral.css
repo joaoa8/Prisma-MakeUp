@@ -119,6 +119,6 @@ nav ul li a {
     transition: color 0.5s ease-in-out;
 }
 
-ul li a:hover:not(.text-white) {
+nav ul li a:hover:not(.text-white) {
     color: var(--tertiary2) !important;
 }

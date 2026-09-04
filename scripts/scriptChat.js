@@ -121,6 +121,7 @@ document.getElementById('resposta').addEventListener('submit', async function (e
     perguntaAtual++;
     if(fotoSelecionada) {
         perguntaAtual++;
+        fotoSelecionada = false;
     }
 
     if (perguntaAtual < perguntas.length) {
@@ -154,11 +155,29 @@ async function enviarParaIa() {
         }
 
         // tenta converter a resposta da API (texto) em objeto JSON
+        // tenta converter a resposta da API (texto) em objeto JSON
         let data;
         try {
-            data = JSON.parse(textoIa);
+            let respostaParseada = JSON.parse(textoIa);
+            
+            // Verifica se a resposta está no formato bruto da API do Gemini
+            if (respostaParseada.candidates && respostaParseada.candidates[0].content.parts[0].text) {
+                // Extrai a string JSON que está dentro do campo 'text'
+                let textoReal = respostaParseada.candidates[0].content.parts[0].text;
+                
+                // Limpa possíveis formatações de markdown (ex: ```json ... ```) que a IA costuma colocar
+                textoReal = textoReal.replace(/```json/g, '').replace(/```/g, '').trim();
+                
+                // Converte a string extraída para o objeto JSON final da maquiagem
+                data = JSON.parse(textoReal);
+            } else {
+                // Se o PHP já tiver retornado o JSON limpo
+                data = respostaParseada;
+            }
+
         } catch (erroParse) {
-            console.error('Resposta não é um JSON válido:', textoIa);
+            console.error('Erro ao fazer o parse do JSON:', erroParse);
+            console.error('Texto recebido:', textoIa);
             adicionarMensagem('Não foi possível obter a recomendação agora.', 'recebida');
             mostrarControlesFinal();
             rolarParaBaixo();
