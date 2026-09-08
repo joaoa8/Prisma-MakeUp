@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="text-end mb-3">
-                            <a href="saveLogin.html" class="link-forgot">Esqueci senha/email</a>
+                            <a href="saveLogin.html" class="link-forgot">Esqueci minha senha</a>
                         </div>
                         <button type="submit" class="btn btn-login w-100">Entrar</button>
                     </form>
@@ -61,7 +61,7 @@
                         <h1 class="fs-4 fw-bold mb-1">Crie sua conta</h1>
                         <p class="text-secondary mb-0">Preencha os dados abaixo</p>
                     </div>
-                    <form method="post" id="signupForm">
+                    <form method="post" id="signupForm" action="../scriptsPHP/cadastro.php">
                         <div class="mb-3">
                             <label for="nameSignup" class="form-label">Nome Completo</label>
                             <input type="text" class="form-control" name="name" id="nameSignup" placeholder="Seu nome">
@@ -111,7 +111,7 @@
             });
         });
 
-        document.querySelectorAll('#loginForm, #signupForm').forEach(function (form) {
+        document.querySelectorAll('#loginForm').forEach(function (form) {
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
 
