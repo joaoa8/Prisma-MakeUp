@@ -1,18 +1,17 @@
 .container-vitrine {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Coloca um card do lado do outro */
     gap: 1.5rem; /* Espaço entre os cards */
     justify-items: center; /* Centraliza os cards no espaço deles */
-    width: 100%;
 }
 
 /* 2. REGRA PARA A TELA PEQUENA (Menos de 1200px) */
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
     
     /* A foto grande some */
     .imagem-produto {
         display: none !important;
     }
+
     
     /* Opcional: Se a tela ficar muito pequena (celular), colocamos 1 por linha para não espremer */
 

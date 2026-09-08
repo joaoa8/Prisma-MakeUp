@@ -46,13 +46,13 @@
      </div>
 
      <div class="row align-items-center justify-content-center m-0 " style="">
-         <div class="col-12 col-lg-5 p-5 col-sm-12 container-vitrine justify-content-center">
+         <div class="col-12 col-xl-5 col-lg-10 col-md-10 col-sm-10 p-5 me-5 container-vitrine justify-content-center">
              <div class="row">
                  <?php foreach ($produtos as $produto): ?>
                      <div class="card-produto col-6 mt-3 mb-4 d-flex justify-content-center">
 
                          <!-- O card continua normal, ele obedece o tamanho da coluna mãe -->
-                         <div class=" card h-100 w-75 shadow-sm border-0" style="background-color: #F4D6F8; border-radius: 13px">
+                         <div class=" card h-100 w-100 shadow-sm border-0" style="background-color: #F4D6F8; border-radius: 13px">
                              <img src="<?php echo $produto['imagem']; ?>" class="card-img-top" alt="<?php echo $produto['nome']; ?>" style="height: 200px; object-fit: cover; border-radius: 13px 13px 0 0">
 
                              <div class="card-body d-flex flex-column p-3">
@@ -70,7 +70,7 @@
                  <?php endforeach; ?>
              </div>
          </div>
-         <div class="col-12 col-lg-4 text-center text-lg-end mb-4 mb-lg-0 me-lg-5 ">
+         <div class="col-12 col-lg-4 col-md-0 col-sm-0 text-center text-lg-end mb-4 mb-lg-0 ms-5 ">
              <img src="../assets/maquiagens/blush2.jpg" alt="Banner da Loja" class="imagem-produto img-fluid rounded shadow d-none d-lg-block" style="max-width: 90%; height: 650px; object-fit: fill;">
          </div>
 
