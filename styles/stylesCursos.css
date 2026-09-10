@@ -1,0 +1,17 @@
+
+    .titulo-curso {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        color: #0f0f0f;
+    }
+
+    .curso-youtube-card {
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    .curso-youtube-card:hover .ratio img {
+        filter: brightness(0.95);
+    }

@@ -47,19 +47,22 @@
         <div class="row align-items-center justify-content-center m-0" >
             
             <!-- 1º VEM A FOTO (Ficará na Esquerda) -->
-            <div class="col-12 col-lg-4 text-center text-lg-end mb-4 mb-lg-0 ms-lg-5">
-                <img src="../assets/maquiagens/po2.jpg" alt="Banner da Loja" class="img-fluid rounded shadow" style="max-width: 90%; height: 650px; object-fit: fill;">
+         <div class="row align-items-center justify-content-center m-0" >
+            
+            <!-- 1º VEM A FOTO (Ficará na Esquerda) -->
+            <div class="imagem-produto col-12 col-lg-4 text-center text-lg-end me-5 mb-4 mb-lg-0">
+                <img src="../assets/maquiagens/batom1.jpg" alt="Banner da Loja" class="img-fluid rounded shadow" style="max-width: 90%; height: 650px; object-fit: fill;">
             </div>
 
             <!-- 2º VÊM OS PRODUTOS (Ficarão na Direita) -->
             <!-- A MÁGICA DO ESPAÇO: Coloquei 'offset-lg-1'. Ele pula 1 coluna inteira em branco antes de desenhar os produtos, criando o afastamento ideal! -->
-            <div class="col-12 col-lg-5 p-5 offset-lg-1">
+            <div class="col-12 col-xl-5 col-lg-10 col-md-10 col-sm-10 p-5 ms-5 container-vitrine">
                 <div class="row m-0">
                     <?php foreach ($produtos as $produto): ?>
                         <div class="col-6 mt-3 mb-4">
                             
                             <!-- Mantive o seu w-75 que deixou os cards mais finos -->
-                        <div class="card h-100 w-75 shadow-sm border-0" style="background-color: #F4D6F8; border-radius: 13px">
+                        <div class="card h-100 w-100 shadow-sm border-0" style="background-color: #F4D6F8; border-radius: 13px">
                             <img src="<?php echo $produto['imagem']; ?>" class="card-img-top" alt="<?php echo $produto['nome']; ?>" style="height: 200px; object-fit: cover; border-radius: 13px 13px 0 0">
                              
                             <div class="card-body d-flex flex-column p-3">
