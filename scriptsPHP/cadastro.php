@@ -5,12 +5,18 @@ $nome  = $_POST['name'];
 $email = $_POST['email'];
 $senha = $_POST['password'];
 
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    header('Location: ../pages/login.php?erro=email_invalido');
+    exit;
+}
+
+
 $check = $pdo->prepare("SELECT id FROM usuarios WHERE email = :email");
 $check->bindParam(':email', $email);
 $check->execute();
 
 if ($check->fetch()) {
-    echo "Email já cadastrado.";
+    header('Location: ../pages/login.php?erro=email_existente');
     exit;
 }
 
@@ -24,9 +30,10 @@ try{
     $stmt->bindParam(':senha', $senha);
 
     $stmt->execute();
-    header('Location: ../index.php');
+    header('Location: ../pages/login.php?sucesso=cadastro');
     exit;
 } catch(PDOException $erro){
-    echo "Erro ao salvar: " . $erro->getMessage();
+    header('Location: ../pages/login.php?erro=servidor');
+    exit;
 }
 ?>

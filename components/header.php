@@ -1,4 +1,6 @@
-<?php $arquivo_atual = basename($_SERVER['PHP_SELF']); 
+<?php 
+session_start();
+$arquivo_atual = basename($_SERVER['PHP_SELF']); 
     if($arquivo_atual == "index.php"){  $isIndex = true;}else{$isIndex = false;}
 ?>
 <header id="main-header" class="<?php if($arquivo_atual !== "admin.php"){ echo "fixed-top w-100 z-3";}?>"
@@ -30,7 +32,10 @@
                             <a class="nav-link p-0 <?php if($arquivo_atual == "chat.php"){echo "text-green2";}?>" href="<?php if($isIndex){echo "./pages/";}?>chat.php">ARIANE</a>
                         </li>
                         <li class="nav-item fw-bold rounded-pill bg-purple2 p-2 px-3">
-                            <a class="nav-link p-0 text-white" href="<?php if($isIndex){echo "./pages/";}?>login.php"><i class="bi bi-person me-1"></i>Login</a>
+                            <a class="nav-link p-0 text-white" href="<?php if($isIndex){echo "./pages/";}?>login.php">
+                                <i class="bi bi-person me-1"></i>
+                                <?php echo isset($_SESSION['usuario_nome']) ? 'Olá, ' . htmlspecialchars(explode(' ', $_SESSION['usuario_nome'])[0]) : 'Login'; ?>
+                            </a>
                         </li>
                         
                     </ul>
