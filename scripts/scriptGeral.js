@@ -19,3 +19,9 @@ const arquivosNotHeader = ["login.php", "chat.php", "admin.php"];
         }, { passive: true });
 
         window.dispatchEvent(new Event('scroll'));
+
+document.addEventListener('DOMContentLoaded', function () {
+    if (arquivosNotHeader.includes(nomeDoArquivo) || window.scrollY >= window.innerHeight - 70) {
+        header.classList.add('bg-purple-transparent', 'border-bottom', 'border-1', 'border-purple2');
+    }
+});

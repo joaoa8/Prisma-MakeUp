@@ -3,7 +3,7 @@ session_start();
 $arquivo_atual = basename($_SERVER['PHP_SELF']); 
     if($arquivo_atual == "index.php"){  $isIndex = true;}else{$isIndex = false;}
 ?>
-<header id="main-header" class="<?php if($arquivo_atual !== "admin.php"){ echo "fixed-top w-100 z-3";}?>"
+<header id="main-header" class="<?php if($arquivo_atual !== "admin.php" && $arquivo_atual !== "produtos.php"){ echo "fixed-top w-100 z-3";}?>"
         style="transition: background-color 0.4s ease, backdrop-filter 0.4s ease;">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid ms-0">

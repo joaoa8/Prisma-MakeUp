@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <div class="text-end mb-3">
-                            <a href="../forms/saveLogin.php" class="link-forgot">Esqueci minha senha</a>
+                            <a href="saveLogin.php" class="link-forgot">Esqueci minha senha</a>
                         </div>
                         <button type="submit" class="btn btn-login w-100">Entrar</button>
                     </form>
