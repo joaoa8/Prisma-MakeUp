@@ -1,23 +1,27 @@
 <?php
-require '../scriptsPHP/conexao.php';
+require '../../scriptsPHP/conexao.php';
 
-$stmt = $pdo->query("SELECT nome, email FROM usuarios");
+$stmt = $pdo->query("SELECT id, nome, email FROM usuarios");
 $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$stmt = $pdo->query("SELECT id, nome AS identificacao, categoria, preco, estoque FROM produtos");
+$stmt = $pdo->query("SELECT id, nome, categoria, preco, estoque FROM produtos");
 $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$stmt = $pdo->query("SELECT id, cliente, total, status FROM pedidos");
-$pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+try {
+    $stmt  = $pdo->query("SELECT id, nome, categoria, nivel, preco FROM cursos");
+    $cursos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $cursos = [];
+}
 
-$totalUsuarios = count($usuarios);
-$totalProdutos = count($produtos);
-$totalPedidos  = count($pedidos);
+// $stmt = $pdo->query("SELECT id, cliente, total, status FROM pedidos");
+// $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$pedidos = [];
 
 $kpis = [
-    ['icon' => 'users',        'val' => $totalUsuarios, 'label' => 'Clientes'],
-    ['icon' => 'box',          'val' => $totalProdutos, 'label' => 'Produtos'],
-    ['icon' => 'shopping-cart','val' => $totalPedidos,  'label' => 'Pedidos'],
+    ['icon' => 'users',        'val' => count($usuarios), 'label' => 'Clientes'],
+    ['icon' => 'box',          'val' => count($produtos), 'label' => 'Produtos'],
+    ['icon' => 'shopping-cart','val' => count($pedidos),  'label' => 'Pedidos'],
 ];
 ?>
 <!DOCTYPE html>
@@ -30,13 +34,13 @@ $kpis = [
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <script src="https://unpkg.com/feather-icons"></script>
-  <link rel="stylesheet" href="../styles/styleAdmin.css">
-  <link rel="stylesheet" href="../styles/styleGeral.css">
+  <link rel="stylesheet" href="../../styles/styleAdmin.css">
+  <link rel="stylesheet" href="../../styles/styleGeral.css">
 </head>
 
 <body>
 
-  <?php include '../components/header.php'; ?>
+  <?php include '../../components/header.php'; ?>
 
   <div class="admin-wrapper">
     <aside class="sidebar">
@@ -119,14 +123,14 @@ $kpis = [
               <input type="text" id="prodSearch" placeholder="Pesquisar produto…"
                 oninput="filterTable('prodTable',this.value)" />
             </div>
-            <button class="btn-primary-custom" onclick="window.location.href='../forms/cadProd.html'"><i
+            <button class="btn-primary-custom" onclick="window.location.href='cadProd.php'"><i
                 data-feather="plus"></i> Novo Produto</button>
           </div>
           <div class="card-admin" style="padding:0; overflow:hidden;">
             <table class="data-table" id="prodTable">
               <thead>
                 <tr>
-                  <th>Identificação</th>
+                  <th>Nome</th>
                   <th>Categoria</th>
                   <th>Preço</th>
                   <th>Estoque</th>
@@ -136,10 +140,19 @@ $kpis = [
               <tbody id="prodBody">
                 <?php if (empty($produtos)): ?>
                   <tr>
-                    <td colspan="5" style="text-align:center; color:#7a688a; padding: 30px;">Nenhum produto cadastrado na
-                      base.</td>
+                    <td colspan="5" style="text-align:center; color:#7a688a; padding: 30px;">Nenhum produto cadastrado na base.</td>
                   </tr>
-                <?php endif; ?>
+                <?php else: foreach ($produtos as $p): ?>
+                  <tr>
+                    <td><?= htmlspecialchars($p['nome']) ?></td>
+                    <td><?= htmlspecialchars($p['categoria']) ?></td>
+                    <td>R$ <?= htmlspecialchars($p['preco']) ?></td>
+                    <td><?= htmlspecialchars($p['estoque']) ?></td>
+                    <td>
+                      <a class="action-btn" href="mod.php?tipo=produto&id=<?= $p['id'] ?>" title="Editar"><i data-feather="edit-2"></i></a>
+                    </td>
+                  </tr>
+                <?php endforeach; endif; ?>
               </tbody>
             </table>
           </div>
@@ -177,7 +190,7 @@ $kpis = [
           </div>
         </div>
 
-        <!-- USUÁRIAS -->
+        <!-- USUÁRIOS -->
         <div class="panel" id="panel-usuarios">
           <div class="table-toolbar">
             <div class="search-box">
@@ -192,18 +205,22 @@ $kpis = [
                 <tr>
                   <th>Nome</th>
                   <th>E-mail</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody id="userBody">
                 <?php if (empty($usuarios)): ?>
                   <tr>
-                    <td colspan="4" style="text-align:center; color:#7a688a; padding: 30px;">Nenhuma conta de cliente
+                    <td colspan="3" style="text-align:center; color:#7a688a; padding: 30px;">Nenhuma conta de cliente
                       registrada.</td>
                   </tr>
                 <?php else: foreach ($usuarios as $u): ?>
                   <tr>
                     <td><?= htmlspecialchars($u['nome']) ?></td>
                     <td><?= htmlspecialchars($u['email']) ?></td>
+                    <td>
+                      <a class="action-btn" href="mod.php?tipo=usuario&id=<?= $u['id'] ?>" title="Editar"><i data-feather="edit-2"></i></a>
+                    </td>
                   </tr>
                 <?php endforeach; endif; ?>
               </tbody>
@@ -214,23 +231,55 @@ $kpis = [
         <!-- TUTORIAIS -->
         <div class="panel" id="panel-cursos">
           <div class="table-toolbar">
-            <button class="btn-primary-custom" onclick="window.location.href='../forms/cadCurso.html'"><i
+            <div class="search-box">
+              <i data-feather="search"></i>
+              <input type="text" id="cursoSearch" placeholder="Pesquisar curso…"
+                oninput="filterTable('cursoTable',this.value)" />
+            </div>
+            <button class="btn-primary-custom" onclick="window.location.href='cadCurso.php'"><i
                 data-feather="upload-cloud"></i> Adicionar Mídia</button>
           </div>
-          <div style="color:#7a688a; font-size: 0.9rem; padding: 20px 0;">
-            A biblioteca de tutoriais está vazia no momento.
+          <div class="card-admin" style="padding:0; overflow:hidden;">
+            <table class="data-table" id="cursoTable">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Categoria</th>
+                  <th>Nível</th>
+                  <th>Preço</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php if (empty($cursos)): ?>
+                  <tr>
+                    <td colspan="5" style="text-align:center; color:#7a688a; padding: 30px;">A biblioteca de tutoriais está vazia no momento.</td>
+                  </tr>
+                <?php else: foreach ($cursos as $c): ?>
+                  <tr>
+                    <td><?= htmlspecialchars($c['nome']) ?></td>
+                    <td><?= htmlspecialchars($c['categoria']) ?></td>
+                    <td><?= htmlspecialchars($c['nivel'] ?? '—') ?></td>
+                    <td>R$ <?= htmlspecialchars($c['preco'] ?? '—') ?></td>
+                    <td>
+                      <a class="action-btn" href="mod.php?tipo=curso&id=<?= $c['id'] ?>" title="Editar"><i data-feather="edit-2"></i></a>
+                    </td>
+                  </tr>
+                <?php endforeach; endif; ?>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <?php include '../components/footer.php'; ?>
+  <?php include '../../components/footer.php'; ?>
 
   <div class="toast-wrap" id="toastWrap"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="scripts/scriptGeral.js"></script>
+  <script src="../../scripts/scriptGeral.js"></script>
   <script>
     feather.replace();
 
@@ -240,7 +289,13 @@ $kpis = [
       document.getElementById('panel-' + panel).classList.add('active');
       if (btn) btn.classList.add('active');
 
-      const titles = { dashboard: 'Visão Geral', produtos: 'Produtos', pedidos: 'Pedidos', usuarios: 'Clientes', cursos: 'Cursos' };
+      const titles = {
+        dashboard: 'Visão Geral',
+        produtos: 'Produtos',
+        pedidos: 'Pedidos',
+        usuarios: 'Clientes',
+        cursos: 'Cursos'
+      };
 
       document.getElementById('pageTitle').textContent = titles[panel] || panel;
     }
@@ -266,7 +321,7 @@ $kpis = [
       }, 3500);
     }
 
-    function logout() { window.location.href = 'login.php'; }
+    function logout() { window.location.href = '../login.php'; }
 
     <?php if (isset($form_success) && $form_success): ?>
       showToast('check-circle', 'Produto registrado com sucesso.', 'ok');
