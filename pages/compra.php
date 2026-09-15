@@ -145,32 +145,7 @@
 </head>
 
 <body>
-    <header id="main-header" class="fixed-top w-100 z-3"
-        style="transition: background-color 0.4s ease, backdrop-filter 0.4s ease;">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid ms-0 d-flex justify-content-center align-items-center">
-
-                <a href="/pages/produtos.html" class="navbar-brand d-inline-block p-0 m-2">
-                    <img src="../assets/logo.png" alt="logo" class="img-fluid" style="max-width: 250px;">
-                </a>
-
-                <div class="d-none d-lg-block collapse navbar-collapse text-center mt-3 mt-lg-0" id="MenuNav">
-                    <ul class="navbar-nav ms-auto d-flex flex-column flex-lg-row align-items-center gap-3 gap-lg-4">
-                        <li class="nav-item">
-                            <a class="nav-link p-0" href="../index.html">SOBRE</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link p-0" href="/pages/produtos.html">PRODUTOS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link p-0" href="#">APRENDER</a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </nav>
-    </header>
+    <?php include '../components/header.php' ?>
     <main class="container d-flex align-items-center justify-content-center">
         <div class="checkout-card mx-auto">
             <h1 class="fs-4 fw-bold mb-4 text-center">Finalizar compra</h1>
@@ -329,11 +304,6 @@
                             </div>
                         </div>
 
-                        <p class="payment-info" id="paymentInfoPix">Você receberá o QR Code do Pix após confirmar o
-                            pedido. Pagamento aprovado em poucos minutos.</p>
-                        <p class="payment-info d-none" id="paymentInfoBoleto">O boleto será gerado após confirmar o
-                            pedido, com vencimento em 3 dias úteis.</p>
-
                         <button type="submit" class="btn btn-checkout w-100 mt-3" id="submitBtn">Finalizar
                             compra</button>
                     </form>
@@ -342,18 +312,9 @@
             </div>
         </div>
     </main>
-    <footer class="border-top border-1 border-purple2 bg-purple w-100 p-3">
-        <div class="text-center">
-            <h4>Prisma <span class="text-purple2">MakeUp</span></h4>
-            <ul class="list-unstyled d-flex justify-content-center gap-4">
-                <li><a class="text-decoration-none text-secondary" href="../index.html">Sobre</a></li>
-                <li><a class="text-decoration-none text-secondary" href="/pages/produtos.html">Produtos</a></li>
-                <li><a class="text-decoration-none text-secondary" href="#">Aprender</a></li>
-            </ul>
-            <p class="text-secondary m-0">© 2026 Prisma MakeUp. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
+    <?php include '../components/footer.php' ?>
+    
+    <script src="../scripts/scriptGeral.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script>
@@ -450,17 +411,6 @@
                 .catch(function () {
                     cepStatus.textContent = 'Não foi possível buscar o CEP. Preencha manualmente.';
                 });
-        });
-
-        const paymentInfoPix = document.getElementById('paymentInfoPix');
-        const paymentInfoBoleto = document.getElementById('paymentInfoBoleto');
-
-        document.querySelectorAll('input[name="payment"]').forEach(function (radio) {
-            radio.addEventListener('change', function () {
-                const isPix = document.getElementById('payPix').checked;
-                paymentInfoPix.classList.toggle('d-none', !isPix);
-                paymentInfoBoleto.classList.toggle('d-none', isPix);
-            });
         });
     </script>
 </body>

@@ -72,10 +72,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="text-end mb-3">
-                            <a href="saveLogin.php" class="link-forgot">Esqueci minha senha</a>
-                        </div>
-                        <button type="submit" class="btn btn-login w-100">Entrar</button>
+                        <button type="submit" class="btn btn-login w-100 mt-4">Entrar</button>
                     </form>
                 </section>
 
@@ -106,7 +103,7 @@
                                 </button>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-signup w-100">Criar conta</button>
+                        <button type="submit" class="btn btn-signup w-100 mt-4">Criar conta</button>
                     </form>
                 </section>
 
