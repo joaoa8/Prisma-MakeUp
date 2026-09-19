@@ -1,4 +1,4 @@
-<section class="bg-purple my-5 py-5 overflow-hidden">
+<section class="bg-green py-5 my-4 overflow-hidden">
             <h3 class="fs-4 fw-bold text-center text-secondary mb-5">Apoiadores e Marcas Parceiras</h3>
 
             <div class="carousel-patrocinadores">

@@ -14,7 +14,15 @@ let fotoSelecionada = false;
 
 function mostrarControles() {
     const controles = document.getElementById('controles');
-
+    const campo = controles.querySelector('#descricao');
+    if (campo) {
+        campo.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        });
+    }
     switch (perguntaAtual) {
         case 0:
             controles.innerHTML = `
@@ -26,41 +34,40 @@ function mostrarControles() {
             controles.innerHTML = `
                 <input id="descricao" name="descricao" type="file" accept="image/*" class="form-control" required>
                 <div class="d-flex justify-content-evenly mt-2">
-                    <button type="submit" class="btn btn-secondary" data-pular="true" formnovalidate>Pular</button>
                     <button type="submit" class="btn btn-primary" onClick="fotoEnviada()">Enviar foto</button>
+                    <button type="button" class="btn btn-secondary btn-pular">Pular</button>
                 </div>`;
-                break;
+            break;
         case 2:
             controles.innerHTML = `
                 <input id="descricao" name="descricao" type="text" class="form-control" placeholder="Ex.: pele clara, olhos castanhos, cabelo loiro" required>
                 <div class="d-flex justify-content-evenly mt-2">
-                    <button type="submit" class="btn btn-secondary" data-pular="true" formnovalidate>Pular</button>
                     <button type="submit" class="btn btn-primary">Continuar</button>
+                    <button type="button" class="btn btn-secondary btn-pular">Pular</button>
                 </div>`;
-                
             break;
         case 3:
             controles.innerHTML = `
                 <input id="descricao" name="descricao" type="text" class="form-control" placeholder="Ex.: casamento, festa, trabalho" required>
                 <div class="d-flex justify-content-evenly mt-2">
-                    <button type="submit" class="btn btn-secondary" data-pular="true" formnovalidate>Pular</button>
                     <button type="submit" class="btn btn-primary">Continuar</button>
+                    <button type="button" class="btn btn-secondary btn-pular">Pular</button>
                 </div>`;
             break;
         case 4:
             controles.innerHTML = `
                 <input id="descricao" name="descricao" type="time" class="form-control" required>
                 <div class="d-flex justify-content-evenly mt-2">
-                    <button type="submit" class="btn btn-secondary" data-pular="true" formnovalidate>Pular</button>
                     <button type="submit" class="btn btn-primary">Continuar</button>
+                    <button type="button" class="btn btn-secondary btn-pular">Pular</button>
                 </div>`;
             break;
         case 5:
             controles.innerHTML = `
                 <input id="descricao" name="descricao" type="text" class="form-control" placeholder="Ex.: natural" required>
                 <div class="d-flex justify-content-evenly mt-2">
-                    <button type="submit" class="btn btn-secondary" data-pular="true" formnovalidate>Pular</button>
                     <button type="submit" class="btn btn-primary">Continuar</button>
+                    <button type="button" class="btn btn-secondary btn-pular">Pular</button>
                 </div>`;
             break;
         case 6:
@@ -77,6 +84,17 @@ function mostrarControles() {
                 </div>`;
             controles.querySelector('#reiniciar').addEventListener('click', reiniciarConversa);
             break;
+    }
+
+    // listener do botão Pular (type="button", não dispara com Enter)
+    const btnPular = controles.querySelector('.btn-pular');
+    if (btnPular) {
+        btnPular.addEventListener('click', function () {
+            document.getElementById('resposta').dispatchEvent(
+                new SubmitEvent('submit', { bubbles: true, cancelable: true, submitter: btnPular })
+            );
+        });
+        btnPular.dataset.pular = 'true';
     }
 }
 
@@ -116,10 +134,10 @@ document.getElementById('resposta').addEventListener('submit', async function (e
         pergunta: perguntas[perguntaAtual],
         resposta: resposta
     });
-    
+
 
     perguntaAtual++;
-    if(fotoSelecionada) {
+    if (fotoSelecionada) {
         perguntaAtual++;
         fotoSelecionada = false;
     }
@@ -159,15 +177,15 @@ async function enviarParaIa() {
         let data;
         try {
             let respostaParseada = JSON.parse(textoIa);
-            
+
             // Verifica se a resposta está no formato bruto da API do Gemini
             if (respostaParseada.candidates && respostaParseada.candidates[0].content.parts[0].text) {
                 // Extrai a string JSON que está dentro do campo 'text'
                 let textoReal = respostaParseada.candidates[0].content.parts[0].text;
-                
+
                 // Limpa possíveis formatações de markdown (ex: ```json ... ```) que a IA costuma colocar
                 textoReal = textoReal.replace(/```json/g, '').replace(/```/g, '').trim();
-                
+
                 // Converte a string extraída para o objeto JSON final da maquiagem
                 data = JSON.parse(textoReal);
             } else {
@@ -307,7 +325,7 @@ function adicionarMensagem(texto, tipo) {
             <div class="card bg-success bg-opacity-25 text-dark border-0 rounded-4 rounded-end-0 rounded-end-lg-4 p-3 shadow-sm ms-auto mb-3" style="max-width: 75%;">
               <p class="mb-1 text-break">${texto}</p>
             </div>`;
-        
+
     } else {
         msg = `
             <div class="card bg-light text-dark border-0 rounded-4 rounded-start-0 p-3 shadow-sm me-auto mb-3" style="max-width: 75%;">

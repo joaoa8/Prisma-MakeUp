@@ -1,7 +1,7 @@
 const header = document.getElementById('main-header');
 const caminhoDaPagina = window.location.pathname;
 const nomeDoArquivo = caminhoDaPagina.substring(caminhoDaPagina.lastIndexOf('/') + 1);
-const arquivosNotHeader = ["login.php", "chat.php", "admin.php"];
+const arquivosNotHeader = ["login.php", "chat.php", "admin.php", "compra.php"];
         let isScrolling = false;
 
         window.addEventListener('scroll', function () {
@@ -20,3 +20,8 @@ const arquivosNotHeader = ["login.php", "chat.php", "admin.php"];
 
         window.dispatchEvent(new Event('scroll'));
 
+document.addEventListener('DOMContentLoaded', function () {
+    if (arquivosNotHeader.includes(nomeDoArquivo) || window.scrollY >= window.innerHeight - 70) {
+        header.classList.add('bg-purple-transparent', 'border-bottom', 'border-1', 'border-purple2');
+    }
+});
