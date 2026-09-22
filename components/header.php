@@ -1,5 +1,7 @@
 <?php 
-session_start();
+if(session_status() === PHP_SESSION_NONE){
+    session_start();
+}
 $arquivo_atual = basename($_SERVER['PHP_SELF']);
 $pasta_atual   = basename(dirname($_SERVER['PHP_SELF']));
 $isCRUD        = ($pasta_atual === 'CRUD');

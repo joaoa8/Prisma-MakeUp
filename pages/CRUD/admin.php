@@ -1,4 +1,4 @@
-<?php
+<?php 
 require '../../scriptsPHP/conexao.php';
 
 $stmt = $pdo->query("SELECT id, nome, email FROM usuarios");
@@ -40,7 +40,11 @@ $kpis = [
 
 <body>
 
-  <?php include '../../components/header.php'; ?>
+  <?php include '../../components/header.php'; 
+    if($_SESSION['admin'] !== 1){
+      var_dump($_SESSION);  
+    }
+  ?>
 
   <div class="admin-wrapper">
     <aside class="sidebar">
