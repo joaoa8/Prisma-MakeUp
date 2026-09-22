@@ -13,6 +13,29 @@
 <body>
     <?php include '../components/header.php'; ?>
     <main class="container-fluid d-flex justify-content-center align-items-center">
+    <?php
+        $mensagem = '';
+        $tipo = '';
+        if (isset($_GET['sucesso']) && $_GET['sucesso'] === 'cadastro') {
+            $mensagem = 'Conta criada com sucesso! Faça login.';
+            $tipo = 'success';
+        } elseif (isset($_GET['erro'])) {
+            $mensagens_erro = [
+                'email_existente' => 'Este e-mail já está cadastrado.',
+                'servidor'        => 'Erro interno. Tente novamente.',
+                'credenciais' => 'Email ou senha inválidos.',
+                'email_invalido' => 'Digite um e-mail válido'
+            ];
+            $mensagem = $mensagens_erro[$_GET['erro']] ?? 'Ocorreu um erro.';
+            $tipo = 'danger';
+        }
+        if ($mensagem):
+    ?>
+        <div class="alert alert-<?= $tipo ?> alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index:9999; min-width:300px;" role="alert">
+            <?= $mensagem ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php endif; ?>
     <div class="auth-card">
             <ul class="nav nav-pills nav-fill mb-4" id="authTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -32,16 +55,16 @@
                         <h1 class="fs-4 fw-bold mb-1">Bem vinda de volta!</h1>
                         <p class="text-secondary mb-0">Entre com seu e-mail e senha</p>
                     </div>
-                    <form method="post" id="loginForm">
+                    <form method="post" id="loginForm" action="../scriptsPHP/entrar.php">
                         <div class="mb-3">
                             <label for="email" class="form-label">E-mail</label>
-                            <input type="text" class="form-control" name="email" id="email" placeholder="seu@email.com">
+                            <input type="text" class="form-control" name="email" id="email" placeholder="seu@email.com" required>
                         </div>
                         <div class="mb-2">
                             <label for="password" class="form-label">Senha</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" name="password" id="password"
-                                    placeholder="Sua senha">
+                                    placeholder="Sua senha" required>
                                 <button type="button" class="btn btn-outline-secondary toggle-password"
                                     aria-label="Mostrar senha">
                                     <i class="icon-eye bi bi-eye-fill"></i>
@@ -49,10 +72,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="text-end mb-3">
-                            <a href="saveLogin.html" class="link-forgot">Esqueci senha/email</a>
-                        </div>
-                        <button type="submit" class="btn btn-login w-100">Entrar</button>
+                        <button type="submit" class="btn btn-login w-100 mt-4">Entrar</button>
                     </form>
                 </section>
 
@@ -61,21 +81,21 @@
                         <h1 class="fs-4 fw-bold mb-1">Crie sua conta</h1>
                         <p class="text-secondary mb-0">Preencha os dados abaixo</p>
                     </div>
-                    <form method="post" id="signupForm">
+                    <form method="post" id="signupForm" action="../scriptsPHP/cadastro.php">
                         <div class="mb-3">
                             <label for="nameSignup" class="form-label">Nome Completo</label>
-                            <input type="text" class="form-control" name="name" id="nameSignup" placeholder="Seu nome">
+                            <input type="text" class="form-control" name="name" id="nameSignup" placeholder="Seu nome" required>
                         </div>
                         <div class="mb-3">
                             <label for="emailSignup" class="form-label">E-mail</label>
                             <input type="text" class="form-control" name="email" id="emailSignup"
-                                placeholder="seu@email.com">
+                                placeholder="seu@email.com" required>
                         </div>
                         <div class="mb-3">
                             <label for="passwordSignup" class="form-label">Senha</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" name="password" id="passwordSignup"
-                                    placeholder="Sua senha">
+                                    placeholder="Sua senha" required>
                                 <button type="button" class="btn btn-outline-secondary toggle-password"
                                     aria-label="Mostrar senha">
                                     <i class="icon-eye bi bi-eye-fill"></i>
@@ -83,7 +103,7 @@
                                 </button>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-signup w-100">Criar conta</button>
+                        <button type="submit" class="btn btn-signup w-100 mt-4">Criar conta</button>
                     </form>
                 </section>
 
@@ -108,19 +128,6 @@
                 eyeIcon.classList.toggle('d-none', isHidden);
                 eyeSlashIcon.classList.toggle('d-none', !isHidden);
                 btn.setAttribute('aria-label', isHidden ? 'Esconder senha' : 'Mostrar senha');
-            });
-        });
-
-        document.querySelectorAll('#loginForm, #signupForm').forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                event.preventDefault();
-
-                if (window.history.length > 1) {
-                    window.history.back();
-                    return;
-                }
-
-                window.location.href = '../index.php';
             });
         });
     </script>

@@ -7,7 +7,7 @@
     <title>Cadastrar produto</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/styleGeral.css">
+    <link rel="stylesheet" href="../../styles/styleGeral.css">
     <style>
         :root {
             --primary: #F4D6F8;
@@ -77,6 +77,27 @@
 </head>
 
 <body>
+    <?php
+        $mensagem = '';
+        $tipo = '';
+        if (isset($_GET['sucesso']) && $_GET['sucesso'] === 'cadastro') {
+            $mensagem = 'Produto cadastrado com sucesso!';
+            $tipo = 'success';
+        } elseif (isset($_GET['erro'])) {
+            $mensagens_erro = [
+                'produto_existente' => 'Já existe um produto com esse nome.',
+                'servidor'          => 'Erro interno. Tente novamente.',
+            ];
+            $mensagem = $mensagens_erro[$_GET['erro']] ?? 'Ocorreu um erro.';
+            $tipo = 'danger';
+        }
+        if ($mensagem):
+    ?>
+        <div class="alert alert-<?= $tipo ?> alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index:9999; min-width:300px;" role="alert">
+            <?= $mensagem ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php endif; ?>
     <main class="container">
         <div class="form-card mx-auto">
             <div class="mb-4 text-center">
@@ -84,27 +105,25 @@
                 <p class="text-secondary mb-0">Preencha as informações do produto</p>
             </div>
 
-            <form method="post" id="productForm">
+            <form method="post" id="productForm" action="../scriptsPHP/addProd.php">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome do produto</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Ex: Camiseta Essential">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Ex: Camiseta Essential" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="category" class="form-label">Categoria</label>
-                    <select class="form-select" id="category" name="category">
+                    <select class="form-select" id="category" name="category" required>
                         <option value="" selected disabled>Selecione uma categoria</option>
-                        <option>Roupas</option>
-                        <option>Calçados</option>
+                        <option>Preparação de pele</option>
+                        <option>Pele</option>
+                        <option>Olhos</option>
+                        <option>Sobrancelhas</option>
+                        <option>Lábios</option>
                         <option>Acessórios</option>
-                        <option>Eletrônicos</option>
-                        <option>Casa e decoração</option>
-                        <option>Beleza e cuidados</option>
-                        <option>Esportes</option>
-                        <option value="outra">Outra</option>
+                        <option>Kits</option>
+                        <option>Outra</option>
                     </select>
-                    <input type="text" class="form-control mt-2 d-none" id="categoryOther" name="categoryOther"
-                        placeholder="Especifique a categoria">
                 </div>
 
                 <div class="row g-3 mb-3">
@@ -113,7 +132,7 @@
                         <div class="input-group">
                             <span class="input-group-text">R$</span>
                             <input type="text" class="form-control" id="price" name="price" placeholder="0,00"
-                                inputmode="decimal">
+                                inputmode="decimal" required>
                         </div>
                     </div>
                     <div class="col-6">
@@ -123,17 +142,51 @@
                     </div>
                 </div>
 
+                <div class="row g-3 mb-3">
+                    <div class="col-6">
+                        <label for="conteudo" class="form-label">Conteúdo</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="conteudo" name="conteudo" placeholder="0" min="0" step="0.1" inputmode="decimal" required>
+                            <select class="input-group-text" name="conteudo_unidade" id="conteudo_unidade">
+                                <option value="g">g</option>
+                                <option value="ml">ml</option>
+                                <option value="unidade">unidade</option>
+                                <option value="item">item</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label for="validade" class="form-label">Validade</label>
+                        <input type="text" class="form-control" id="validade" name="validade" placeholder="Ex: 12 meses" required>
+                    </div>
+                </div>
+
                 <div class="mb-1">
                     <label for="description" class="form-label">Descrição</label>
                     <textarea class="form-control" id="description" name="description" rows="4" maxlength="500"
                         placeholder="Descreva o produto: material, características, diferenciais..."></textarea>
                 </div>
-                <div class="text-end mb-4">
-                    <span class="char-counter"><span id="charCount">0</span>/500</span>
+
+                <div class="mb-1">
+                    <label for="indicacao" class="form-label">Indicação</label>
+                    <textarea class="form-control" id="indicacao" name="indicacao" rows="4" maxlength="500"
+                        placeholder="Para quem é indicado este produto..."></textarea>
+                </div>
+
+                <div class="mb-1">
+                    <label for="cuidados" class="form-label">Cuidados e Informações Gerais</label>
+                    <textarea class="form-control" id="cuidados" name="cuidados" rows="4" maxlength="500"
+                        placeholder="Cuidados de uso, conservação, advertências..."></textarea>
+                </div>
+
+                <div class="mb-1">
+                    <label for="informacoes" class="form-label">Informações Técnicas</label>
+                    <textarea class="form-control" id="informacoes" name="informacoes" rows="4" maxlength="500"
+                        placeholder="Composição, fórmula, certificações técnicas..."></textarea>
                 </div>
 
                 <div class="d-flex gap-2">
-                    <button type="button" class="btn btn-cancel flex-shrink-0">Cancelar</button>
+                    <a href="admin.php" class="btn btn-cancel flex-shrink-0">Cancelar</a>
                     <button type="submit" class="btn btn-save w-100">Salvar produto</button>
                 </div>
             </form>
@@ -143,14 +196,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script>
-        const categorySelect = document.getElementById('category');
-        const categoryOther = document.getElementById('categoryOther');
-        categorySelect.addEventListener('change', function () {
-            const isOther = categorySelect.value === 'outra';
-            categoryOther.classList.toggle('d-none', !isOther);
-            if (!isOther) categoryOther.value = '';
-        });
-
         const priceInput = document.getElementById('price');
         priceInput.addEventListener('input', function () {
             let value = priceInput.value.replace(/[^0-9,]/g, '');

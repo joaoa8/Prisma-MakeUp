@@ -1,16 +1,18 @@
-<?php $arquivo_atual = basename($_SERVER['PHP_SELF']); 
-    if($arquivo_atual == "index.php"){  $isIndex = true;}else{$isIndex = false;}
+<?php $arquivo_atual = basename($_SERVER['PHP_SELF']);
+    $pasta_atual = basename(dirname($_SERVER['PHP_SELF']));
+    $isCRUD      = ($pasta_atual === 'CRUD');
+    $prefix_up   = $isCRUD ? '../../' : '../';
+    if($arquivo_atual == "index.php"){ $isIndex = true; }else{ $isIndex = false; }
 ?>
 <footer class="border-top border-1 border-purple2 bg-purple w-100 p-3">
         <div class="text-center">
             <h4>Prisma <span class="text-purple2">MakeUp</span></h4>
-            <?php if($isIndex){   
-                echo '<ul class="list-unstyled d-flex justify-content-center gap-4">
-                    <li><a class="text-decoration-none text-secondary"  href="<?php if($isIndex){echo "#";}else{echo "../index.php";}?>">Sobre</a></li>
-                    <li><a class="text-decoration-none text-secondary"  href="<?php if($isIndex){echo "/Prisma-MakeUp/pages/";}?>produtos.php">Produtos</a></li>
-                    <li><a class="text-decoration-none text-secondary" href="<?php if($isIndex){echo "/Prisma-MakeUp/pages/";}?>cursos.php">Aprender</a></li>
-                </ul>';
-            }?>
+            <ul class="list-unstyled d-flex justify-content-center gap-4">
+                    <li><a class="text-decoration-none text-secondary"  href="<?php if($isIndex){echo "#";}else{ echo $prefix_up . "index.php";}?>">Sobre</a></li>
+                    <li><a class="text-decoration-none text-secondary"  href="<?php if($isIndex){echo "./pages/";}else{ echo $prefix_up . "pages/";}?>produtos.php">Produtos</a></li>
+                    <li><a class="text-decoration-none text-secondary" href="<?php if($isIndex){echo "./pages/";}else{ echo $prefix_up . "pages/";}?>cursos.php">Aprender</a></li>
+                    <li><a class="text-decoration-none text-secondary" href="<?php if($isIndex){echo "./pages/";}else{ echo $prefix_up . "pages/";}?>chat.php">Ariane</a></li>
+            </ul>
             <p class="text-secondary m-0">© 2026 Prisma MakeUp. Todos os direitos reservados.</p>
         </div>
 </footer>

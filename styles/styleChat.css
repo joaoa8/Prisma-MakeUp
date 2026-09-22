@@ -107,8 +107,15 @@ footer{
         line-height: 1.5;
     }
 
+    /* Modifique esta parte para aumentar os botões e inputs */
     #controles .btn,
     #controles .form-control{
-        font-size: 1.05rem;
+        font-size: 1.25rem; /* Letra maior */
+        padding: 0.8rem 1.5rem; /* Mais espaçamento interno (altura e largura) */
+    }
+
+    /* Opcional: Definir uma largura mínima para os botões não ficarem espremidos */
+    #controles .btn {
+        min-width: 180px;
     }
 }
